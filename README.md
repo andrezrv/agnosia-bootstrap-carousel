@@ -4,16 +4,17 @@ A tool that hooks the `[gallery]` shortcode with attribute `type="carousel"` in 
 
 This plugin assumes either your theme includes the necessary **Bootstrap** javascript and CSS files to display the carousel properly, or that you have included those files on your own. It will not include the files for you, so if they are not present, the carousel will not work and you will only obtain its bare HTML.
 
-#### Basic example:
+#### Basic examples:
 
 
 `[gallery type="carousel" ids="61,60,59"]`
+`[carousel-gallery ids="61,60,59"]`
 
 
 #### Required attributes:
 
 
-*	**type:** it needs to be `type="carousel"` if you use the `[gallery]` shortcode. Alternatively, you can use the `[carousel-gallery]` without specifiying `type="carousel"`.
+*	**type:** it needs to be `type="carousel"` if you use the `[gallery]` shortcode. Alternatively, you can use the `[carousel-gallery]` shortcode without specifiying `type="carousel"`.
 *	**ids:** you must provide a list of `ids` corresponding to attachments, like `ids="1,2,3"`.
 
 Otherwise, the default `[gallery]` shortcode function will be processed instead of this plugin's one.
