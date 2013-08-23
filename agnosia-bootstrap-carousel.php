@@ -16,13 +16,18 @@ Version: 0.3
 
 remove_shortcode( 'gallery', 'gallery_shortcode' ); /* Remove original shortcode */
 add_shortcode( 'gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
+add_shortcode( 'carousel-gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
 
 
 
-function agnosia_bootstrap_carousel_gallery_shortcode( $attr ) {
+function agnosia_bootstrap_carousel_gallery_shortcode( $attr, $content, $tag ) {
 
 	/* Validate for necessary data */
-	if ( isset( $attr['ids'] ) and isset( $attr['type'] ) and $attr['type'] == 'carousel' ) :
+	if ( isset( $attr['ids'] ) 
+		and ( ( isset( $attr['type'] ) and 'carousel' == $attr['type'] ) 
+			or ( 'carousel-gallery' == $tag ) 
+		) 
+	) :
 
 		/* Define data by given attributes. */
 		$attr['ids'] = $attr['ids'];

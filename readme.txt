@@ -25,7 +25,7 @@ This plugin assumes either your theme includes the necessary **Bootstrap** javas
 #### Required attributes:
 
 
-*	**type:** it needs to be `type="carousel"`.
+*	**type:** it needs to be `type="carousel"` if you use the `[gallery]` shortcode. Alternatively, you can use the `[carousel-gallery] without specifiying `type="carousel"`.
 *	**ids:** you must provide a list of `ids` corresponding to attachments, like `ids="1,2,3"`.
 
 Otherwise, the default `[gallery]` shortcode function will be processed instead of this plugin's one.
