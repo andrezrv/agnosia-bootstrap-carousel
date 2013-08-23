@@ -19,38 +19,44 @@ add_shortcode( 'gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* A
 add_shortcode( 'carousel-gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
 
 
+function agnosia_bootstrap_carousel_gallery_shortcode( $atts, $content, $tag ) {
 
-function agnosia_bootstrap_carousel_gallery_shortcode( $attr, $content, $tag ) {
+	/* Define data by given attributes. */
+	$shortcode_atts = shortcode_atts( array(
+		'ids' => false,
+		'type' => '',
+		'name' => 'agnosia-bootstrap-carousel', /* Any name. String will be sanitize to be used as HTML ID. Recomended when you want to have more than one carousel in the same page. Default: agnosia-bootstrap-carousel. */
+		'width' => '',  /* Carousel container width, in px or % */
+		'height' => '', /* Carousel item height, in px or % */
+		'indicators' => 'before-inner',  /* Accepted values: before-inner, after-inner, after-control, false. Default: before-inner. */
+		'control' => 'true', /* Accepted values: true, false. Default: true. */
+		'interval' => 5000,  /* The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle. */
+		'pause' => 'hover', /* Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. */
+		'titletag' => 'h4', /* Define tag for image title. Default: h4. */
+		'title' => 'true', /* Show or hide image title. Set false to hide. Default: true. */
+		'text' => 'true', /* Show or hide image text. Set false to hide. Default: true. */
+		'wpautop' => 'true', /* Auto-format text. Default: true. */
+		'containerclass' => '', /* Extra class for container. */
+		'itemclass' => '', /* Extra class for item. */
+		'captionclass' => '' /* Extra class for caption. */
+	), $atts );
+
+	extract( $shortcode_atts );
+
+	$name = sanitize_title( $name );
 
 	/* Validate for necessary data */
-	if ( isset( $attr['ids'] ) 
-		and ( ( isset( $attr['type'] ) and 'carousel' == $attr['type'] ) 
+	if ( isset( $ids ) 
+		and ( ( isset( $type ) and 'carousel' == $type ) 
 			or ( 'carousel-gallery' == $tag ) 
 		) 
 	) :
 
-		/* Define data by given attributes. */
-		$attr['ids'] = $attr['ids'];
-		$attr['name'] = isset( $attr['name'] ) ? sanitize_title( $attr['name'] ) : 'agnosia-bootstrap-carousel' ; /* Any name. String will be sanitize to be used as HTML ID. Recomended when you want to have more than one carousel in the same page. Default: agnosia-bootstrap-carousel. */
-		$attr['width'] = isset( $attr['width'] ) ? $attr['width'] : '' ; /* Carousel container width, in px or % */
-		$attr['height'] = isset( $attr['height'] ) ? $attr['height'] : '' ; /* Carousel item height, in px or % */
-		$attr['indicators'] = isset( $attr['indicators'] ) ? $attr['indicators'] : 'before-inner' ; /* Accepted values: before-inner, after-inner, after-control, false. Default: before-inner. */		
-		$attr['control'] = isset( $attr['control'] ) ? $attr['control'] : 'true' ; /* Accepted values: true, false. Default: true. */
-		$attr['interval'] = isset( $attr['interval'] ) ? $attr['interval'] : 5000 ; /* The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle. */
-		$attr['pause'] = isset( $attr['pause'] ) ? $attr['pause'] : 'hover' ; /* Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. */
-		$attr['titletag'] = isset( $attr['titletag'] ) ? $attr['titletag'] : 'h4' ; /* Define tag for image title. Default: h4. */
-		$attr['title'] = isset( $attr['title'] ) ? $attr['title'] : 'true' ; /* Show or hide image title. Set false to hide. Default: true. */
-		$attr['text'] = isset( $attr['text'] ) ? $attr['text'] : 'true' ; /* Show or hide image text. Set false to hide. Default: true. */
-		$attr['wpautop'] = isset( $attr['wpautop'] ) ? $attr['wpautop'] : 'true' ; /* Auto-format text. Default: true. */
-		$attr['containerclass'] = isset( $attr['containerclass'] ) ? $attr['containerclass'] : '' ; /* Extra class for container. */
-		$attr['itemclass'] = isset( $attr['itemclass'] ) ? $attr['itemclass'] : '' ; /* Extra class for item. */
-		$attr['captionclass'] = isset( $attr['captionclass'] ) ? $attr['captionclass'] : '' ; /* Extra class for caption. */
-
 		/* Obtain HTML. */
-		$output = agnosia_bootstrap_carousel_get_html_from( $attr );
+		$output = agnosia_bootstrap_carousel_get_html_from( $shortcode_atts );
 
 	/* If attributes could not be validated, execute default gallery shortcode function */
-	else : $output = gallery_shortcode( $attr ) ;
+	else : $output = gallery_shortcode( $atts ) ;
 
 	endif;
 
@@ -60,11 +66,13 @@ function agnosia_bootstrap_carousel_gallery_shortcode( $attr, $content, $tag ) {
 
 
 
-function agnosia_bootstrap_carousel_get_html_from( $attr ) {
+function agnosia_bootstrap_carousel_get_html_from( $shortcode_atts ) {
 
 	/* Obtain posts array by given ids. Then construct HTML. */
 
-	$images = agnosia_bootstrap_carousel_make_array( $attr['ids'] );
+	extract( $shortcode_atts );
+
+	$images = agnosia_bootstrap_carousel_make_array( $ids );
 
 	$output = '';
 
@@ -80,7 +88,7 @@ function agnosia_bootstrap_carousel_get_html_from( $attr ) {
 
 		if ( is_array( $posts ) and !empty( $posts ) ) :
 
-			$output = agnosia_bootstrap_carousel_make_html_from( $attr , $posts );
+			$output = agnosia_bootstrap_carousel_make_html_from( $shortcode_atts , $posts );
 
 		endif;
 
@@ -92,31 +100,33 @@ function agnosia_bootstrap_carousel_get_html_from( $attr ) {
 
 
 
-function agnosia_bootstrap_carousel_make_html_from( $attr , $posts ) {
+function agnosia_bootstrap_carousel_make_html_from( $shortcode_atts , $posts ) {
 
 	/* The important stuff happens here! */
 
+	extract( $shortcode_atts );
+
 	/* Define width of carousel container */
 	$container_style = '';
-	if ( $attr['width'] ) :
+	if ( $width ) :
 		$container_style = 'style="';
-		if ( $attr['width'] ) : $container_style .= 'width:' . $attr['width'] . ';' ; endif;
+		if ( $width ) : $container_style .= 'width:' . $width . ';' ; endif;
 		$container_style .= '"';
 	endif;
 
 	/* Define height of carousel item */
 	$item_style = '';
-	if ( $attr['height'] ) :
+	if ( $height ) :
 		$item_style = 'style="';
-		if ( $attr['height'] ) : $item_style .= 'height:' . $attr['height'] . ';' ; endif;
+		if ( $height ) : $item_style .= 'height:' . $height . ';' ; endif;
 		$item_style .= '"';
 	endif;
 
 	/* Initialize carousel HTML. */
-	$output = '<div id="' . $attr['name'] . '" class="carousel slide ' . $attr['containerclass'] . '" ' . $container_style . '>';
+	$output = '<div id="' . $name . '" class="carousel slide ' . $containerclass . '" ' . $container_style . '>';
 
 	/* Try to obtain indicators before inner. */
-	$output .= ( $attr['indicators'] == 'before-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $indicators == 'before-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $name ) : '' ;
 
 	/* Initialize inner. */
 	$output .= '<div class="carousel-inner">';
@@ -133,17 +143,17 @@ function agnosia_bootstrap_carousel_make_html_from( $attr , $posts ) {
 
 			$class = ( $i == 0 ) ? 'active ' : '';
 
-			$output .= '<div class="' . $class . 'item ' . $attr['itemclass'] . '" data-slide-no="' . $i . '" ' . $item_style . '>';
+			$output .= '<div class="' . $class . 'item ' . $itemclass . '" data-slide-no="' . $i . '" ' . $item_style . '>';
 
 			$output .= '<img alt="' . $post['post_title'] . '" src="' . $image[0] . '" />';
 
-			if ( $attr['title'] != 'false' or $attr['text'] != 'false' ) :
+			if ( $title != 'false' or $text != 'false' ) :
 
-				$output .= '<div class="carousel-caption ' . $attr['captionclass'] . '">';
+				$output .= '<div class="carousel-caption ' . $captionclass . '">';
 
-				if ( $attr['title'] != 'false' ) : $output .= '<'. $attr['titletag'] .'>' . $post['post_title'] . '</' . $attr['titletag'] . '>'; endif;
+				if ( $title != 'false' ) : $output .= '<'. $titletag .'>' . $post['post_title'] . '</' . $titletag . '>'; endif;
 
-				if ( $attr['text'] != 'false' ) : $output .= ( $attr['wpautop'] != 'false' ) ? wpautop( $post['post_excerpt'] ) : $post['post_excerpt'] ; endif;
+				if ( $text != 'false' ) : $output .= ( $wpautop != 'false' ) ? wpautop( $post['post_excerpt'] ) : $post['post_excerpt'] ; endif;
 
 				$output .= '</div>';
 
@@ -161,19 +171,19 @@ function agnosia_bootstrap_carousel_make_html_from( $attr , $posts ) {
 	$output .= '</div>';
 
 	/* Try to obtain indicators after inner. */
-	$output .= ( $attr['indicators'] == 'after-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $indicators == 'after-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $name ) : '' ;
 
-	$output .= ( $attr['control'] != 'false' ) ? agnosia_bootstrap_carousel_make_control_html_with( $attr['name'] ) : '' ;
+	$output .= ( $control != 'false' ) ? agnosia_bootstrap_carousel_make_control_html_with( $name ) : '' ;
 
 	/* Try to obtain indicators after control. */
-	$output .= ( $attr['indicators'] == 'after-control' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $indicators == 'after-control' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $name ) : '' ;
 
 	/* End carousel HTML. */
 	$output .= '</div>';
 
 	/* Obtain javascript for carousel. */
 	$output .= '<script type="text/javascript">// <![CDATA[
-jQuery(document).ready( function() { jQuery(\'#' . $attr['name'] . '\').carousel( { interval : ' . $attr['interval'] . ' , pause : "' . $attr['pause'] . '" } ); } );
+jQuery(document).ready( function() { jQuery(\'#' . $name . '\').carousel( { interval : ' . $interval . ' , pause : "' . $pause . '" } ); } );
 // ]]></script>';
 
 	return $output;
