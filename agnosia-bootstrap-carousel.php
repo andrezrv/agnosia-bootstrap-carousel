@@ -2,7 +2,7 @@
 
 /**
  * @package Agnosia_Bootstrap_Carousel
- * @version 0.2
+ * @version 0.3
  */
 
 /*
@@ -11,15 +11,15 @@ Plugin URI: http://wordpress.org/extend/plugins/agnosia-bootstrap-carousel/
 Description: Hooks the <code>[gallery]</code> shortcode with attribute <code>type="carousel"</code> in order to show a <a href="http://twitter.github.io/bootstrap/javascript.html#carousel" target="_blank">Bootstrap Carousel</a> based on the selected images and their titles and descriptions. <strong>Very important:</strong> this plugin assumes either your theme includes the necessary Bootstrap Javascript and CSS files to display the carousel properly, or that you have included the files on your own. It will not include the files for you, so if they are not present, the carousel will not work.
 Author: AuSoft, Andr&eacute;s Villarreal
 Author URI: http://aufieroinformatica.com/wordpress/
-Version: 0.2
+Version: 0.3
 */
 
 remove_shortcode( 'gallery', 'gallery_shortcode' ); /* Remove original shortcode */
-add_shortcode( 'gallery', 'agnosia_bootstrat_carousel_gallery_shortcode' ); /* Add custom shortcode */
+add_shortcode( 'gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
 
 
 
-function agnosia_bootstrat_carousel_gallery_shortcode( $attr ) {
+function agnosia_bootstrap_carousel_gallery_shortcode( $attr ) {
 
 	/* Validate for necessary data */
 	if ( isset( $attr['ids'] ) and isset( $attr['type'] ) and $attr['type'] == 'carousel' ) :
@@ -42,7 +42,7 @@ function agnosia_bootstrat_carousel_gallery_shortcode( $attr ) {
 		$attr['captionclass'] = isset( $attr['captionclass'] ) ? $attr['captionclass'] : '' ; /* Extra class for caption. */
 
 		/* Obtain HTML. */
-		$output = agnosia_bootstrat_carousel_get_html_from( $attr );
+		$output = agnosia_bootstrap_carousel_get_html_from( $attr );
 
 	/* If attributes could not be validated, execute default gallery shortcode function */
 	else : $output = gallery_shortcode( $attr ) ;
@@ -55,11 +55,11 @@ function agnosia_bootstrat_carousel_gallery_shortcode( $attr ) {
 
 
 
-function agnosia_bootstrat_carousel_get_html_from( $attr ) {
+function agnosia_bootstrap_carousel_get_html_from( $attr ) {
 
 	/* Obtain posts array by given ids. Then construct HTML. */
 
-	$images = agnosia_bootstrat_carousel_make_array( $attr['ids'] );
+	$images = agnosia_bootstrap_carousel_make_array( $attr['ids'] );
 
 	$output = '';
 
@@ -75,7 +75,7 @@ function agnosia_bootstrat_carousel_get_html_from( $attr ) {
 
 		if ( is_array( $posts ) and !empty( $posts ) ) :
 
-			$output = agnosia_bootstrat_carousel_make_html_from( $attr , $posts );
+			$output = agnosia_bootstrap_carousel_make_html_from( $attr , $posts );
 
 		endif;
 
@@ -87,7 +87,7 @@ function agnosia_bootstrat_carousel_get_html_from( $attr ) {
 
 
 
-function agnosia_bootstrat_carousel_make_html_from( $attr , $posts ) {
+function agnosia_bootstrap_carousel_make_html_from( $attr , $posts ) {
 
 	/* The important stuff happens here! */
 
@@ -111,7 +111,7 @@ function agnosia_bootstrat_carousel_make_html_from( $attr , $posts ) {
 	$output = '<div id="' . $attr['name'] . '" class="carousel slide ' . $attr['containerclass'] . '" ' . $container_style . '>';
 
 	/* Try to obtain indicators before inner. */
-	$output .= ( $attr['indicators'] == 'before-inner' ) ? agnosia_bootstrat_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $attr['indicators'] == 'before-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
 
 	/* Initialize inner. */
 	$output .= '<div class="carousel-inner">';
@@ -156,12 +156,12 @@ function agnosia_bootstrat_carousel_make_html_from( $attr , $posts ) {
 	$output .= '</div>';
 
 	/* Try to obtain indicators after inner. */
-	$output .= ( $attr['indicators'] == 'after-inner' ) ? agnosia_bootstrat_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $attr['indicators'] == 'after-inner' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
 
-	$output .= ( $attr['control'] != 'false' ) ? agnosia_bootstrat_carousel_make_control_html_with( $attr['name'] ) : '' ;
+	$output .= ( $attr['control'] != 'false' ) ? agnosia_bootstrap_carousel_make_control_html_with( $attr['name'] ) : '' ;
 
 	/* Try to obtain indicators after control. */
-	$output .= ( $attr['indicators'] == 'after-control' ) ? agnosia_bootstrat_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
+	$output .= ( $attr['indicators'] == 'after-control' ) ? agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $attr['name'] ) : '' ;
 
 	/* End carousel HTML. */
 	$output .= '</div>';
@@ -177,7 +177,7 @@ jQuery(document).ready( function() { jQuery(\'#' . $attr['name'] . '\').carousel
 
 
 /* Obtain indicators from $posts array. */
-function agnosia_bootstrat_carousel_make_indicators_html_from( $posts , $name ) {
+function agnosia_bootstrap_carousel_make_indicators_html_from( $posts , $name ) {
 
 	$output = '<ol class="carousel-indicators">';
 
@@ -205,7 +205,7 @@ function agnosia_bootstrat_carousel_make_indicators_html_from( $posts , $name ) 
 
 
 /* Obtain control links. */
-function agnosia_bootstrat_carousel_make_control_html_with( $name ) {
+function agnosia_bootstrap_carousel_make_control_html_with( $name ) {
 
 	$output = '<a class="carousel-control left" href="#' . $name . '" data-slide="prev">&lsaquo;</a>';
 	$output .= '<a class="carousel-control right" href="#' . $name . '" data-slide="next">&rsaquo;</a>';
@@ -217,7 +217,7 @@ function agnosia_bootstrat_carousel_make_control_html_with( $name ) {
 
 
 /* Obtain array of id given comma-separated values in a string. */
-function agnosia_bootstrat_carousel_make_array( $string ) {
+function agnosia_bootstrap_carousel_make_array( $string ) {
 
 	$array = explode( ',' , $string );
 	return $array;
