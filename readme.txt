@@ -67,7 +67,7 @@ For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-boo
 == Changelog ==
 
 = 0.3 =
-* Alternative shortcode `[carousel-gallery]` to prevent compatibility issues.
+Fixed compatibility issues.
 
 = 0.2 =
 **New optional attributes:** `width`, `height`, `titletag`, `wpautop`, `title`, `text`, `itemclass`, `containerclass`, `captionclass`.

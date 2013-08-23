@@ -14,12 +14,12 @@ Author URI: http://aufieroinformatica.com/wordpress/
 Version: 0.3
 */
 
-remove_shortcode( 'gallery', 'gallery_shortcode' ); /* Remove original shortcode */
-add_shortcode( 'gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
-add_shortcode( 'carousel-gallery', 'agnosia_bootstrap_carousel_gallery_shortcode' ); /* Add custom shortcode */
+/**
+ * Hook the gallery default HTML.
+ */
+add_filter( 'post_gallery', 'agnosia_bootstrap_carousel_gallery_shortcode', 10, 4 );
 
-
-function agnosia_bootstrap_carousel_gallery_shortcode( $atts, $content, $tag ) {
+function agnosia_bootstrap_carousel_gallery_shortcode( $output = '', $atts, $content = false, $tag = false ) {
 
 	/* Define data by given attributes. */
 	$shortcode_atts = shortcode_atts( array(
@@ -56,7 +56,7 @@ function agnosia_bootstrap_carousel_gallery_shortcode( $atts, $content, $tag ) {
 		$output = agnosia_bootstrap_carousel_get_html_from( $shortcode_atts );
 
 	/* If attributes could not be validated, execute default gallery shortcode function */
-	else : $output = gallery_shortcode( $atts ) ;
+	else : $output = '';
 
 	endif;
 
