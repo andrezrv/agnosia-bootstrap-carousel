@@ -3,7 +3,7 @@ Contributors: andrezrv, aufieroi
 Donate link: http://aufieroinformatica.com/wordpress/agnosia-bootstrap-carousel-by-ausoft/
 Tags: bootstrap, responsive, carousel, images, slider
 Requires at least: 3.0
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,7 +26,7 @@ This plugin assumes either your theme includes the necessary **Bootstrap** javas
 #### Required attributes:
 
 
-*	**type:** it needs to be `type="carousel"` if you use the `[gallery]` shortcode. Alternatively, you can use the `[carousel-gallery]` shortcode without specifiying `type="carousel"`.
+*	**type:** it needs to be `type="carousel"` if you use the `[gallery]` shortcode.
 *	**ids:** you must provide a list of `ids` corresponding to attachments, like `ids="1,2,3"`.
 
 Otherwise, the default `[gallery]` shortcode function will be processed instead of this plugin's one.
