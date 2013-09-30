@@ -8,7 +8,6 @@ This plugin assumes either your theme includes the necessary **Bootstrap** javas
 
 
 `[gallery type="carousel" ids="61,60,59"]`
-`[carousel-gallery ids="61,60,59"]`
 
 
 #### Required attributes:
@@ -37,6 +36,7 @@ Otherwise, the default `[gallery]` shortcode function will be processed instead 
 *	**control:** control arrows display. **Accepted values:** *true* (to show), *false* (to hide). **Default:** *true*. **Example:** `[gallery type="carousel" ids="61,60,59" control="false"]`
 *	**interval:** the amount of time to delay between automatically cycling an item. If *false*, carousel will not automatically cycle. **Default:** *5000*. **Example:** `[gallery type="carousel" ids="61,60,59" interval="2000"]`
 *	**pause:** pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. **Default:** *"hover"*. **Example:** `[gallery type="carousel" ids="61,60,59" interval="hover"]`
+*   **size:** size for image attachment. **Accepted values:** *thumbnail*, *medium*, *large*, *full*. **Default:** *full*. See [wp_get_attachment_image_src()](http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src) for further reference. **Example:** `[gallery type="carousel" ids="61,60,59" size="full"]`
 
 For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-bootstrap-carousel-by-ausoft/>
 
@@ -47,6 +47,9 @@ For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-boo
 3. Start using the `[gallery]` shortcode to show a [Bootstrap Carousel](http://twitter.github.io/bootstrap/javascript.html#carousel).
 
 ## Changelog
+
+#### 0.3.1
+Added new *size* attribute. Thanks to [blogrammierer](http://wordpress.org/support/profile/blogrammierer)!
 
 #### 0.3
 Fixed compatibility issues.

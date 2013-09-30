@@ -3,8 +3,8 @@ Contributors: andrezrv, aufieroi
 Donate link: http://aufieroinformatica.com/wordpress/agnosia-bootstrap-carousel-by-ausoft/
 Tags: bootstrap, responsive, carousel, images, slider
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 0.3
+Tested up to: 3.6.1
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,6 @@ This plugin assumes either your theme includes the necessary **Bootstrap** javas
 
 
 `[gallery type="carousel" ids="61,60,59"]`
-`[carousel-gallery ids="61,60,59"]`
 
 
 #### Required attributes:
@@ -49,6 +48,7 @@ Otherwise, the default `[gallery]` shortcode function will be processed instead 
 *	**control:** control arrows display. **Accepted values:** *true* (to show), *false* (to hide). **Default:** *true*. **Example:** `[gallery type="carousel" ids="61,60,59" control="false"]`
 *	**interval:** the amount of time to delay between automatically cycling an item. If *false*, carousel will not automatically cycle. **Default:** *5000*. **Example:** `[gallery type="carousel" ids="61,60,59" interval="2000"]`
 *	**pause:** pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. **Default:** *"hover"*. **Example:** `[gallery type="carousel" ids="61,60,59" interval="hover"]`
+*   **size:** size for image attachment. **Accepted values:** *thumbnail*, *medium*, *large*, *full*. **Default:** *full*. See [wp_get_attachment_image_src()](http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src) for further reference. **Example:** `[gallery type="carousel" ids="61,60,59" size="full"]`
 
 For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-bootstrap-carousel-by-ausoft/>
 
@@ -65,6 +65,9 @@ For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-boo
 3. This is an approximation on how the resultant HTML code should look like.
 
 == Changelog ==
+
+= 0.3.1 =
+Added new *size* attribute. Thanks to [blogrammierer](http://wordpress.org/support/profile/blogrammierer)!
 
 = 0.3 =
 Fixed compatibility issues.
