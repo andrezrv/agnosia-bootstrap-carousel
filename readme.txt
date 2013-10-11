@@ -50,7 +50,11 @@ Otherwise, the default `[gallery]` shortcode function will be processed instead 
 *	**pause:** pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. **Default:** *"hover"*. **Example:** `[gallery type="carousel" ids="61,60,59" interval="hover"]`
 *   **size:** size for image attachment. **Accepted values:** *thumbnail*, *medium*, *large*, *full*. **Default:** *full*. See [wp_get_attachment_image_src()](http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src) for further reference. **Example:** `[gallery type="carousel" ids="61,60,59" size="full"]`
 
-For more information, visit <http://aufieroinformatica.com/wordpress/agnosia-bootstrap-carousel-by-ausoft/>
+#### Contribute
+
+You can make suggestions and submit your own modifications to this plugin on [Github](https://github.com/andrezrv/agnosia-bootstrap-carousel).
+
+For more information, visit [our website](http://aufieroinformatica.com).
 
 == Installation ==
 
