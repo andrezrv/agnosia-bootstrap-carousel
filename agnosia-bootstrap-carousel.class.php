@@ -136,7 +136,7 @@ class Agnosia_Bootstrap_Carousel {
 				$posts[] = get_post( intval( $image_id ) , ARRAY_A );
 			}
 		}
-		$posts = apply_filters( 'agnosia_bootstrap_carousel_posts', $posts );
+		$posts = apply_filters( 'agnosia_bootstrap_carousel_posts', $posts, $this->attributes );
 		return $posts;
 	}
 
@@ -151,7 +151,7 @@ class Agnosia_Bootstrap_Carousel {
 		if ( $width ) {
 			$container_style = 'style="width:' . $width . ';"';
 		}
-		$container_style = apply_filters( 'agnosia_bootstrap_carousel_container_style', $container_style );
+		$container_style = apply_filters( 'agnosia_bootstrap_carousel_container_style', $container_style, $this->attributes );
 		return $container_style;
 	}
 
@@ -166,7 +166,7 @@ class Agnosia_Bootstrap_Carousel {
 		if ( $height ) {
 			$item_style = 'style="height:' . $height . ';"' ;
 		}
-		$item_style = apply_filters( 'agnosia_bootstrap_carousel_item_style', $item_style );
+		$item_style = apply_filters( 'agnosia_bootstrap_carousel_item_style', $item_style, $this->attributtes );
 		return $item_style;
 	}
 
@@ -219,7 +219,7 @@ class Agnosia_Bootstrap_Carousel {
 		// Obtain javascript for carousel.
 		$output .= $this->get_javascript();
 
-		$output = apply_filters( 'agnosia_bootstrap_carousel_output', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_output', $output, $this->attributes );
 
 		return $output;
 
@@ -245,7 +245,7 @@ class Agnosia_Bootstrap_Carousel {
 				// Do nothing.
 				break;
 		}
-		$output = apply_filters( 'agnosia_bootstrap_carousel_container', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_container', $output, $this->attributes );
 		return $output;
 	}
 
@@ -269,7 +269,7 @@ class Agnosia_Bootstrap_Carousel {
 				// Do nothing.
 				break;
 		}
-		$output = apply_filters( 'agnosia_bootstrap_carousel_inner', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_inner', $output, $this->attributes );
 		return $output;
 	}
 
@@ -293,7 +293,7 @@ class Agnosia_Bootstrap_Carousel {
 				// Do nothing.
 				break;
 		}
-		$output = apply_filters( 'agnosia_bootstrap_carousel_caption_container', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_caption_container', $output, $this->attributes );
 		return $output;
 	}
 
@@ -319,7 +319,7 @@ class Agnosia_Bootstrap_Carousel {
 				// Do nothing.
 				break;
 		}
-		$output = apply_filters( 'agnosia_bootstrap_carousel_img_container', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_img_container', $output, $this->attributes );
 		return $output;
 	}
 
@@ -334,7 +334,7 @@ class Agnosia_Bootstrap_Carousel {
 		$output = '';
 		$image = wp_get_attachment_image_src( $post['ID'] , $size );
 		$output .= '<img alt="' . $post['post_title'] . '" src="' . $image[0] . '" />';
-		$output = apply_filters( 'agnosia_bootstrap_carousel_img', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_img', $output, $image[0], $this->attributes, $post );
 		return $output;
 	}
 
@@ -360,7 +360,7 @@ class Agnosia_Bootstrap_Carousel {
 			 } 
 			$output .= '<'. $titletag .'>' . $post_title . '</' . $titletag . '>';
 		endif;
-		$output = apply_filters( 'agnosia_bootstrap_carousel_title', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_title', $output, $this->attributes );
 		return $output;
 	}
 
@@ -375,7 +375,7 @@ class Agnosia_Bootstrap_Carousel {
 		if ( 'false' !== 'text' ) {
 			$output .= ( $wpautop != 'false' ) ? wpautop( $post['post_excerpt'] ) : $post['post_excerpt'];
 		}
-		$output = apply_filters( 'agnosia_bootstrap_carousel_excerpt', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_excerpt', $output, $this->attributes );
 		return $output;
 	}
 
@@ -398,7 +398,7 @@ class Agnosia_Bootstrap_Carousel {
 			}
 		}
 		$output .= '</ol>';
-		$output = apply_filters( 'agnosia_bootstrap_carousel_indicators', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_indicators', $output, $this->attributes );
 		return $output;
 	}
 
@@ -412,7 +412,7 @@ class Agnosia_Bootstrap_Carousel {
 		extract( $this->attributes );
 		$output = '<a class="carousel-control left" href="#' . $name . '" data-slide="prev">&lsaquo;</a>';
 		$output .= '<a class="carousel-control right" href="#' . $name . '" data-slide="next">&rsaquo;</a>';
-		$output = apply_filters( 'agnosia_bootstrap_carousel_control', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_control', $output, $this->attributes );
 		return $output;
 	}
 
@@ -426,7 +426,7 @@ class Agnosia_Bootstrap_Carousel {
 		$output = '<script type="text/javascript">// <![CDATA[
 jQuery(document).ready( function($) { $(\'#' . $name . '\').carousel( { interval : ' . $interval . ' , pause : "' . $pause . '" } ); } );
 // ]]></script>';
-		$output = apply_filters( 'agnosia_bootstrap_carousel_javascript', $output );
+		$output = apply_filters( 'agnosia_bootstrap_carousel_javascript', $output, $this->attributes );
 		return $output;
 	}
 
@@ -443,7 +443,7 @@ jQuery(document).ready( function($) { $(\'#' . $name . '\').carousel( { interval
 		if ( 'rand' == $orderby ) {
 			shuffle( $array );
 		}
-		$array = apply_filters( 'agnosia_bootstrap_carousel_make_array', $array );
+		$array = apply_filters( 'agnosia_bootstrap_carousel_make_array', $array, $this->attributes );
 		return $array;
 	}
 
