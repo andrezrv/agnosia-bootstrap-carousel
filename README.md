@@ -4,7 +4,7 @@ A tool that hooks the `[gallery]` shortcode with attribute `type="carousel"` in 
 
 This plugin assumes either your theme includes the necessary Bootstrap javascript and CSS files to display the carousel properly, or that you have included those files on your own. It will not include the files for you, so if they are not present, the carousel will not work and you will only obtain its bare HTML.
 
-Current stable version: [1.0][version_link]
+Current stable version: [1.1][version_link]
 
 #### Basic examples:
 
@@ -80,6 +80,9 @@ This plugin took a lot of work. If it is helpful to you on a regular basis, you 
 
 ## Changelog
 
+#### 1.1
+* Improvements on filters. See [commit](https://github.com/andrezrv/agnosia-bootstrap-carousel/commit/d94762d1) for details.
+
 #### 1.0
 * Support for random order.
 * Support for link type ("attachment image", "media file" and "none").
@@ -100,6 +103,6 @@ New optional attributes: `width`, `height`, `titletag`, `wpautop`, `title`, `tex
 #### 0.1
 First release! Only available at the [WordPress Plugin Repository](http://wordpress.org/plugins/agnosia-bootstrap-carousel/)
 
-[version_link]: http://github.com/andrezrv/agnosia-bootstrap-carousel/tree/1.0
-[download_link]: http://github.com/andrezrv/agnosia-bootstrap-carousel/archive/1.0.zip
+[version_link]: http://github.com/andrezrv/agnosia-bootstrap-carousel/tree/1.1
+[download_link]: http://github.com/andrezrv/agnosia-bootstrap-carousel/archive/1.1.zip
 [carousel_link]: http://getbootstrap.com/javascript/#carousel
