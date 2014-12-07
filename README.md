@@ -1,4 +1,4 @@
-# Agnosia Bootstrap Carousel by AuSoft
+# Agnosia Bootstrap Carousel
 
 A tool that hooks the `[gallery]` shortcode with attribute `type="carousel"` in order to show a [Bootstrap Carousel](http://getbootstrap.com/javascript/#carousel) based on the selected images and their titles and descriptions.
 
